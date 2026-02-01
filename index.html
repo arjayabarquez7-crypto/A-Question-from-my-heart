@@ -17,7 +17,7 @@ body {
   position: relative;
 }
 
-/* Upright hearts with counter-clockwise rotation */
+/* Hearts */
 .heart {
   position: absolute;
   width: 30px;
@@ -46,6 +46,7 @@ body {
   100% { transform: rotate(-315deg); }
 }
 
+/* Envelope */
 .envelope {
   width: 400px;
   height: 300px;
@@ -160,19 +161,23 @@ envelope.addEventListener('click', () => {
   }
 });
 
+// NO button moves randomly
 noBtn.addEventListener('mouseenter', () => {
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 80 - 40;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.position = 'absolute';
+  noBtn.style.left = x + 'px';
+  noBtn.style.top = y + 'px';
 });
 
+// YES button shows romantic message
 yesBtn.addEventListener('click', (e) => {
   e.stopPropagation();
   envelope.style.display = 'none';
   romantic.style.display = 'block';
 });
 
-// Floating hearts creation
+// Floating hearts
 const heartsContainer = document.getElementById('heartsContainer');
 for (let i = 0; i < 20; i++) {
   const heart = document.createElement('div');
